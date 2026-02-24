@@ -1,6 +1,7 @@
 package com.java17.programs.redifined.all;
 
 import java.util.*;
+import java.util.Comparator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,6 +13,7 @@ public class TwoSumFindIndexesIntArray {
         int target = 16;
 
 
+        Integer maxi = Arrays.stream(nums).boxed().max(Comparator.naturalOrder()).get();
 
         List<int[]> resultStream =  twoSumUsingStream(nums, target);
 
@@ -193,6 +195,26 @@ public class TwoSumFindIndexesIntArray {
                 .collect(Collectors.joining(" "));           // join back with spaces
 
         System.out.println(reversedWords);
+
+        //Input: "Hello, world!  How are you?"
+        //
+        //    Output: "you? are How  world! Hello,"
+        //
+
+        //Input:
+        String str23 = "Hello, world!  How are you?";
+
+        String mirrorString = Arrays.stream(str23.split(" ")).collect(Collectors.collectingAndThen(
+                Collectors.toList(),
+                listt -> {
+                    Collections.reverse(listt);
+                    return String.join(" ", listt);
+
+                }
+
+
+        ));
+        System.out.println(mirrorString);
 
 
 

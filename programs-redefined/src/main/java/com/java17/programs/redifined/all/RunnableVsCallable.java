@@ -36,6 +36,7 @@ public class RunnableVsCallable {
 
         CompletableFuture<Void> runAsync = CompletableFuture.runAsync(() -> {
             System.out.println("Running async task in: " + Thread.currentThread().getName());
+            new Thread(task).start();
         });
 
         runAsync.join(); // Wait for completion

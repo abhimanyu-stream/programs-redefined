@@ -9,17 +9,18 @@ public class FindLongestCommonPrefixStringArray {
 
     }
 
-    private static String longestCommonPrefix(String[] s) {
+    private static String longestCommonPrefix(String[] S) {
 
 
-        String prefix = s[0];
+        String prefix = S[0];
 
-        for(int i = 1; i < s.length; i++){
-            while (s[i].indexOf(prefix) != 0){
-                prefix = prefix.substring(0, prefix.length() - 1);
+        for (int i = 1; i < S.length ; i++) {// as S is String[]
+            //while (S[i].indexOf(prefix) != 0) {
+            while (!S[i].startsWith(prefix)) {
+                prefix = prefix.substring(0, prefix.length() - 1); // as prefix is String
+                if (prefix.isEmpty()) return "";
             }
-            if(prefix.isEmpty())
-                return "";
+
         }
         return prefix;
 
