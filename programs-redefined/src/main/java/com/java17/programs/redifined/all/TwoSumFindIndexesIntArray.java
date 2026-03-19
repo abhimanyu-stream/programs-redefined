@@ -111,6 +111,18 @@ public class TwoSumFindIndexesIntArray {
 
         String str2 = "hello world";
 
+
+        List<Character> list2 = str2.chars()                       // Stream of int (Unicode values)
+                .mapToObj(c -> (char) c)                                  // Convert int -> Character
+                .collect(Collectors.groupingBy(                           // Group by character
+                        Function.identity(),
+                        LinkedHashMap::new,                               // Preserve insertion order
+                        Collectors.counting()                             // Count occurrences
+                )).entrySet().stream().filter(f -> f.getValue() > 1L).map(Map.Entry::getKey).toList();
+
+        System.out.println("list2 chars :"+ list2);
+
+
         Map<Character, Long> charMap3 = str2.chars()                       // Stream of int (Unicode values)
                 .mapToObj(c -> (char) c)                                  // Convert int -> Character
                 .collect(Collectors.groupingBy(                           // Group by character
@@ -151,6 +163,16 @@ public class TwoSumFindIndexesIntArray {
                         }
                 );
         System.out.println(new String(builder));
+
+
+        // Convert into Map after sorting
+       /* charMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(
+                       Map.entry() .getKey(),
+
+                ));
+        }*/
 
 
 
@@ -204,16 +226,16 @@ public class TwoSumFindIndexesIntArray {
         //Input:
         String str23 = "Hello, world!  How are you?";
 
-        String mirrorString = Arrays.stream(str23.split(" ")).collect(Collectors.collectingAndThen(
-                Collectors.toList(),
-                listt -> {
-                    Collections.reverse(listt);
-                    return String.join(" ", listt);
+        String mirrorString = Arrays.stream(str23.split(" "))
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        listt -> {
+                            Collections.reverse(listt);
+                            return String.join(" ", listt);
 
-                }
-
-
-        ));
+                            }
+                        )
+                );
         System.out.println(mirrorString);
 
 

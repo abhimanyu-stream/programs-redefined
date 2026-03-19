@@ -43,12 +43,31 @@ public class RunnableVsCallable {
 
         //CompletableFuture.supplyAsync(Supplier<T>) → 🔸 Returns result
         CompletableFuture<String> supplyAsync = CompletableFuture.supplyAsync(() -> {
-            return "Result from " + Thread.currentThread().getName();
+            String result;
+
+            try {
+                result = task2.call();
+            } catch (java.lang.Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            //return "Result from " + Thread.currentThread().getName();
+            return result;
         });
 
         String result = supplyAsync.join(); // or future.get();
         System.out.println(result);
 
+
+
+
+
+
+
+
+
+
+        
         // Convert Callable to Supplier (for use in supplyAsync)
         Callable<String> callable = () -> "Hello from Callable";
 
